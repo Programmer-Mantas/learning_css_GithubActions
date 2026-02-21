@@ -1,0 +1,228 @@
+.page-grid {
+  display: grid;
+}
+
+/* first section */
+.first {
+  position: relative;
+  height: 100vh;          /* 🔥 THIS IS KEY */
+  width: 100%;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+
+/* Fullscreen video */
+.first-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay content */
+.first-content {
+  position: relative;
+  z-index: 1;
+  color: white;
+  /* text-align: right; */
+  /* border-radius: 14px; */
+  font-size: 6em;
+}
+
+html,body {
+    height: 100%;
+    margin: 0;
+    background-color: rgb(0, 0, 0);
+}
+
+/* body {
+    background-color: blanchedalmond;
+} */
+
+
+.grid-container {
+    width: 100%;
+  height: 100%;
+
+  display: grid;
+  gap: 1.5vw;
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+
+  grid-template-areas:
+    "box-1 box-2 box-2 box-3"
+    "box-1 box-2 box-2 box-4"
+    "box-5 box-6 box-7 box-8"
+    "box-5 box-9 box-9 box-8";
+}
+
+@media(max-width: 56em){
+    .grid-container{
+        grid-template-areas: 
+        "box-1 box-1 box-2"
+        "box-1 box-1 box-3"
+        "box-4 box-5 box-5"
+        "box-6 box-7 box-8"
+        "box-9 box-9 box-8";
+    }
+}
+
+@media(max-width: 42em){
+    .grid-container{
+        grid-template-areas: 
+        "box-1 box-1"
+        "box-2 box-3"
+        "box-4 box-4"
+        "box-5 box-6"
+        "box-7 box-7"
+        "box-8 box-9";
+    }
+}
+
+/* .item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.6),
+    rgba(0,0,0,0.1)
+  );
+  border-radius: 12px;
+} */
+
+/* .item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.55),
+    rgba(0,0,0,0.55)
+  );
+  border-radius: 12px;
+} */
+
+
+.item > * {
+  position: relative;
+  z-index: 1;
+}
+
+.item {
+      position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+
+  background-size: cover;
+  background-position: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+  /* position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  background-size: 105%;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  min-height: 220px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease; */
+}
+
+.label {
+  padding: 0.6em 1.2em;
+  border-radius: 12px;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  color: #ffffff;
+  font-size: clamp(2rem, 2.5vw, 2.5rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.6);
+
+  text-align: center;
+  white-space: nowrap;
+}
+
+.item:hover {
+  transform: scale(1.03);
+  z-index: 2;
+  box-shadow:
+    0 30px 60px rgba(0, 0, 0, 0.7);
+  /* transform: scale(1.04) translateY(-4px);
+  background-size: 112%;
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.6); */
+}
+
+.item:hover .label {
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.content {
+  padding: 2.5vw;
+  height: 100vh;              /* 🔥 full screen */
+  width: 100%;
+
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+
+  background: #000;         
+}
+
+/* .item {
+  position: relative;
+  padding: 2em;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: white;
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.2;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 200px;
+
+  text-shadow:
+    0 2px 6px rgba(0,0,0,0.9),
+    0 0 12px rgba(0,0,0,0.6);
+} */
+
+.bg-1 { background-image: url("/css_grid/ekranas.jpg"); }
+.bg-2 { background-image: url("/css_grid/galas.jpg"); }
+.bg-3 { background-image: url("/css_grid/priekis.jpg"); }
+.bg-4 { background-image: url("/css_grid/sonas.jpg"); }
+.bg-5 { background-image: url("/css_grid/temp_skydelis.jpg"); }
+.bg-7 { background-image: url("/css_grid/ratas.jpg"); }
+.bg-6 { background-image: url("/css_grid/kitas_priekis.jpg"); }
+.bg-8 { background-image: url("/css_grid/vairas.jpg"); }
+.bg-9 { background-image: url("/css_grid/spidometras.jpg"); }
