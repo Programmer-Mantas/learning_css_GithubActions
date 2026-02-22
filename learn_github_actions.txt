@@ -1,0 +1,82 @@
+github actions(3):
+	Container actions - env is part of the code (actions can only be run in linux env that Github hosts)
+	JavaScript actions - have to specify env to execute actions. can run in vm/cloud/on-premises. support linux/windows
+	Composite actions - combine multiple workflows steps within one action. bundle together multiple run commands into  an action and then have workflow that executes the bundled  commands as a single step using action
+	
+	
+	https://github.com/actions/checkout 
+steps:
+  - uses: actions/checkout@v1
+  - name: npm install and build webpack
+    run: |
+      npm install
+      npm run build
+	  
+
+workflow - automated process that you add to your repository with at least 1 job (different events  can trigger it) 
+you can use it to build, test, package, release or deploy your repository's project on Github
+
+Jobs - sets runner(git-hosted or self-hosted), can run on a machine or in a container
+runs-on: (<runner>)
+
+steps - individual task that run commands in a job. 
+
+action - standalone commands like:
+	run: npm install -g bats (to execute a command on the runner)
+
+
+
+
+
+
+	workflow (on:push) -> 
+		job (build:/name:; runs on:[self-hosted, linux, ARM32] ->
+			steps: ->
+				actions: uses:actions/checkout@v2; uses: ./actions-create_file; with: Variable: "dev-ops"
+				actions: uses:./action-modify-read-me
+				
+
+
+
+
+workflows uses cron for schedualing or on manual events like warning in logs:
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Test scenario tags'
+		
+repository_dispatch - github API to trigger webhook event. this allows trigger a workflow for activity that  
+occurs outside of github
+
+to do this 2 steps required::
+	send a POST request to the GitHub endpoint /repos/{owner}/{repo}/dispatches with the webhook event names in the request body,
+	curl \
+  -X POST \
+  -H "Accept: application/vnd.github.v3+json" \
+  https://api.github.com/repos/octocat/hello-world/dispatches \
+  -d '{"event_type":"event_type"}'
+  
+and configure your workflow to use the repository_dispatch event:
+	on:
+  repository_dispatch:
+    types: [opened, deleted]
+	
+	
+	
+	
+Use specific versions of an action:	
+	steps:    
+  # Reference a specific commit
+  - uses: actions/setup-node@c46424eee26de4078d34105d3de3cc4992202b1e
+  # Reference the major version of a release
+  - uses: actions/setup-node@v1
+  # Reference a minor version of a release
+  - uses: actions/setup-node@v1.2
+  # Reference a branch
+  - uses: actions/setup-node@main
